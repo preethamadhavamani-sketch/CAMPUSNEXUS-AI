@@ -1,0 +1,65 @@
+{
+    "timestamp": "2026-09-19T13:25:54.097873",
+    "buildings": [
+        {
+            "name": "Main Block",
+            "energy_kwh": 592,
+            "baseline_energy": 400,
+            "occupancy_percent": 86,
+            "baseline_occupancy": 60,
+            "waste_fill_percent": 59,
+            "baseline_waste": 50,
+            "status": "Normal"
+        },
+        {
+            "name": "ECE Block",
+            "energy_kwh": 359,
+            "baseline_energy": 350,
+            "occupancy_percent": 66,
+            "baseline_occupancy": 60,
+            "waste_fill_percent": 51,
+            "baseline_waste": 50,
+            "status": "Normal"
+        },
+        {
+            "name": "CSE Block",
+            "energy_kwh": 404,
+            "baseline_energy": 380,
+            "occupancy_percent": 80,
+            "baseline_occupancy": 60,
+            "waste_fill_percent": 69,
+            "baseline_waste": 50,
+            "status": "Normal"
+        },
+        {
+            "name": "Library",
+            "energy_kwh": 266,
+            "baseline_energy": 250,
+            "occupancy_percent": 57,
+            "baseline_occupancy": 50,
+            "waste_fill_percent": 30,
+            "baseline_waste": 40,
+            "status": "Normal"
+        },
+        {
+            "name": "Laboratory Block",
+            "energy_kwh": 463,
+            "baseline_energy": 450,
+            "occupancy_percent": 56,
+            "baseline_occupancy": 40,
+            "waste_fill_percent": 83,
+            "baseline_waste": 60,
+            "status": "Normal"
+        },
+        {
+            "name": "Hostel",
+            "energy_kwh": 662,
+            "baseline_energy": 500,
+            "occupancy_percent": 95,
+            "baseline_occupancy": 80,
+            "waste_fill_percent": 100,
+            "baseline_waste": 70,
+            "status": "Normal"
+        }
+    ]
+}
