@@ -1,22 +1,17 @@
 const API_BASE = 'http://127.0.0.1:5000/api';
 
-// Navigation Logic
 document.querySelectorAll('.menu a').forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
 
-        // Update active class
         document.querySelectorAll('.menu a').forEach(l => l.classList.remove('active'));
         e.currentTarget.classList.add('active');
 
-        // Hide all pages
         document.querySelectorAll('.page-container').forEach(p => p.classList.add('hidden'));
 
-        // Show target page
         const targetPage = e.currentTarget.getAttribute('data-page');
         document.getElementById(`page-${targetPage}`).classList.remove('hidden');
 
-        // Update Title - remove icons if any, we just hardcode mapping or keep it clean
         const titles = {
             'dashboard': 'Campus Intelligence Dashboard',
             'energy': 'Energy Consumption',
@@ -39,7 +34,6 @@ document.querySelectorAll('.menu a').forEach(link => {
         document.getElementById('page-title').innerText = titles[targetPage] || 'Dashboard Overview';
         document.querySelector('.header-titles .subtitle').innerText = subtitles[targetPage] || '';
 
-        // Refresh specific page data if needed
         if (targetPage === 'energy') loadEnergy();
         if (targetPage === 'occupancy') loadOccupancy();
         if (targetPage === 'waste') loadWaste();
@@ -48,7 +42,6 @@ document.querySelectorAll('.menu a').forEach(link => {
     });
 });
 
-// Generic Fetch
 async function fetchData(endpoint, options = {}) {
     try {
         const res = await fetch(`${API_BASE}${endpoint}`, options);
@@ -62,7 +55,6 @@ async function fetchData(endpoint, options = {}) {
     }
 }
 
-// Load Dashboard
 async function loadDashboard() {
     const data = await fetchData('/dashboard');
     if (!data) return;
@@ -72,10 +64,9 @@ async function loadDashboard() {
     document.getElementById('dash-waste').innerText = `${data.waste_level}%`;
     document.getElementById('dash-alerts').innerText = data.active_alerts;
 
-    // Efficiency Score updating
     document.getElementById('dash-score').innerText = data.efficiency_score;
     document.getElementById('dash-score-expl').innerText = data.score_explanation;
-    // Update progress bar
+   
     const bar = document.getElementById('dash-score-bar');
     bar.style.width = `${data.efficiency_score}%`;
     if (data.efficiency_score >= 80) bar.style.backgroundColor = 'var(--success)';
@@ -84,16 +75,13 @@ async function loadDashboard() {
 
     document.getElementById('dash-cost').innerText = `$ ${data.estimated_daily_cost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-    // Update badge
     const badge = document.getElementById('alert-badge');
     badge.innerText = data.active_alerts;
     if (data.active_alerts > 0) badge.classList.remove('hidden');
     else badge.classList.add('hidden');
 
-    // Update timestamp
     document.getElementById('last-updated').innerHTML = `Last updated<br><span>${new Date(data.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>`;
 
-    // Populate building cards
     const container = document.getElementById('dash-buildings');
     container.innerHTML = '';
     data.buildings.forEach(b => {
@@ -118,7 +106,6 @@ async function loadDashboard() {
     });
 }
 
-// Load Energy
 async function loadEnergy() {
     const data = await fetchData('/energy');
     if (!data) return;
@@ -149,7 +136,6 @@ async function loadEnergy() {
     });
 }
 
-// Load Occupancy
 async function loadOccupancy() {
     const data = await fetchData('/occupancy');
     if (!data) return;
@@ -182,7 +168,6 @@ async function loadOccupancy() {
     });
 }
 
-// Load Waste
 async function loadWaste() {
     const data = await fetchData('/waste');
     if (!data) return;
@@ -211,7 +196,6 @@ async function loadWaste() {
     });
 }
 
-// Load Alerts
 let currentAlerts = [];
 async function loadAlerts() {
     const data = await fetchData('/alerts');
@@ -253,7 +237,6 @@ function renderAlerts(filter) {
     });
 }
 
-// Alert Filters
 document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -262,7 +245,6 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     });
 });
 
-// Load Insights
 async function loadInsights() {
     const data = await fetchData('/insights');
     if (!data) return;
@@ -289,7 +271,6 @@ async function loadInsights() {
     });
 }
 
-// What-If Sliders
 ['hvac', 'lighting'].forEach(id => {
     const el = document.getElementById(`wi-${id}`);
     el.addEventListener('input', (e) => {
@@ -301,7 +282,6 @@ document.getElementById('wi-occupancy').addEventListener('input', (e) => {
     document.getElementById('wi-occupancy-val').innerText = `${val > 0 ? '+' : ''}${val}%`;
 });
 
-// Calculate What-If
 document.getElementById('btn-calc-whatif').addEventListener('click', async () => {
     const payload = {
         hvac_reduction: document.getElementById('wi-hvac').value,
@@ -323,7 +303,7 @@ document.getElementById('btn-calc-whatif').addEventListener('click', async () =>
     }
 });
 
-// Run Simulation
+
 document.getElementById('btn-simulate').addEventListener('click', async () => {
     const btn = document.getElementById('btn-simulate');
     const originalText = btn.innerText;
@@ -333,10 +313,9 @@ document.getElementById('btn-simulate').addEventListener('click', async () => {
 
     const data = await fetchData('/simulate', { method: 'POST' });
     if (data) {
-        // Reload current page view
+     
         loadDashboard();
 
-        // Also refresh the specific page we might be on
         const activePage = document.querySelector('.menu a.active').getAttribute('data-page');
         if (activePage === 'energy') loadEnergy();
         if (activePage === 'occupancy') loadOccupancy();
@@ -350,5 +329,4 @@ document.getElementById('btn-simulate').addEventListener('click', async () => {
     btn.style.opacity = '1';
 });
 
-// Init
 loadDashboard();
