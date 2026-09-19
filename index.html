@@ -4,15 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAMPUSNEXUS AI - Smart Campus Intelligence</title>
+    <title>CampusNexus AI - Smart Campus Intelligence</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="layout">
+        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
-                <h1>CAMPUSNEXUS AI</h1>
+                <h1>CampusNexus AI</h1>
                 <p>Smart Campus Intelligence</p>
             </div>
             <nav class="menu">
@@ -87,6 +88,8 @@
                 <p id="last-updated">Last updated<br><span>Never</span></p>
             </div>
         </aside>
+
+        <!-- Main Content -->
         <main class="main-content">
             <header class="top-header">
                 <div class="header-titles">
@@ -95,6 +98,7 @@
                 </div>
             </header>
 
+            <!-- Error Banner -->
             <div id="error-banner" class="hidden">
                 <svg class="icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
@@ -105,8 +109,12 @@
                 Unable to connect to campus data service.
             </div>
 
+            <!-- Page Content Containers -->
+
+            <!-- Dashboard Page -->
             <div id="page-dashboard" class="page-container active">
                 <div class="grid summary-cards">
+                    <!-- Energy Card -->
                     <div class="card stat-card">
                         <div class="stat-header">
                             <h3>Total Energy</h3>
@@ -120,6 +128,7 @@
                         <p class="value text-blue" id="dash-energy">-- kWh</p>
                     </div>
 
+                    <!-- Occupancy Card -->
                     <div class="card stat-card">
                         <div class="stat-header">
                             <h3>Campus Occupancy</h3>
@@ -135,6 +144,8 @@
                         </div>
                         <p class="value text-blue" id="dash-occupancy">--%</p>
                     </div>
+
+                    <!-- Waste Card -->
                     <div class="card stat-card">
                         <div class="stat-header">
                             <h3>Waste Level</h3>
@@ -151,6 +162,7 @@
                         <p class="value text-orange" id="dash-waste">--%</p>
                     </div>
 
+                    <!-- Alerts Card -->
                     <div class="card stat-card">
                         <div class="stat-header">
                             <h3>Active Alerts</h3>
@@ -168,6 +180,7 @@
                         <p class="value text-red" id="dash-alerts">--</p>
                     </div>
 
+                    <!-- Efficiency Score Card -->
                     <div class="card stat-card efficiency-card">
                         <div class="stat-header">
                             <h3>Efficiency Score</h3>
@@ -190,6 +203,7 @@
                         <small id="dash-score-expl" class="score-expl text-muted mt-2">Loading...</small>
                     </div>
 
+                    <!-- Cost Card -->
                     <div class="card stat-card">
                         <div class="stat-header">
                             <h3>Est. Daily Cost</h3>
@@ -211,36 +225,44 @@
                 </div>
 
                 <div class="grid building-cards" id="dash-buildings">
+                    <!-- Populated by JS -->
                 </div>
             </div>
 
+            <!-- Energy Page -->
             <div id="page-energy" class="page-container hidden">
                 <div class="section-header">
                     <h2 class="section-title">Energy Consumption Analysis</h2>
                     <p class="section-subtitle">Current vs Expected Baseline for all buildings</p>
                 </div>
                 <div class="grid building-cards" id="energy-list">
+                    <!-- Populated by JS -->
                 </div>
             </div>
 
+            <!-- Occupancy Page -->
             <div id="page-occupancy" class="page-container hidden">
                 <div class="section-header">
                     <h2 class="section-title">Campus Occupancy Status</h2>
                     <p class="section-subtitle">Real-time space utilization and crowding analysis.</p>
                 </div>
                 <div class="grid building-cards" id="occupancy-list">
+                    <!-- Populated by JS -->
                 </div>
             </div>
 
+            <!-- Waste Page -->
             <div id="page-waste" class="page-container hidden">
                 <div class="section-header">
                     <h2 class="section-title">Waste Management</h2>
                     <p class="section-subtitle">Bin fill levels and collection requirements.</p>
                 </div>
                 <div class="grid building-cards" id="waste-list">
+                    <!-- Populated by JS -->
                 </div>
             </div>
 
+            <!-- Alerts Page -->
             <div id="page-alerts" class="page-container hidden">
                 <div class="section-header">
                     <h2 class="section-title">System Alerts</h2>
@@ -253,18 +275,22 @@
                     <button class="filter-btn" data-filter="MEDIUM">Medium</button>
                 </div>
                 <div class="alert-list" id="alerts-container">
+                    <!-- Populated by JS -->
                 </div>
             </div>
 
+            <!-- Insights Page -->
             <div id="page-insights" class="page-container hidden">
                 <div class="section-header">
                     <h2 class="section-title">Intelligent Insights</h2>
                     <p class="section-subtitle">Actionable recommendations to improve resource utilization.</p>
                 </div>
                 <div class="insights-list" id="insights-container">
+                    <!-- Populated by JS -->
                 </div>
             </div>
 
+            <!-- What-If Simulator Page -->
             <div id="page-whatif" class="page-container hidden">
                 <div class="section-header">
                     <h2 class="section-title">What-If Simulator</h2>
